@@ -1,0 +1,74 @@
+[theme = "dark"] {
+    --bg-color: hsl(207, 26%, 17%);
+    --txt-color:hsl(0, 100%, 100%);
+    --el-color:hsl(209, 23%, 22%);
+    --input-color:hsl(0, 100%, 100%);
+    --border-color:hsl(207, 26%, 10%);
+}
+
+[theme = "light"] {
+    --bg-color: hsl(0, 0%, 99%);
+    --txt-color:hsl(200, 15%, 8%);
+    --el-color:hsl(0, 100%, 100%);
+    --input-color:hsl(0, 0%, 50%);
+    --border-color:rgba(0, 0, 0, 0.1);
+}
+
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight:300;
+    color:var(--txt-color);
+}
+
+.container{
+    width:100%;
+    min-height:100vh;
+    min-width: 350px;
+}
+
+.light-mode{
+    background-color:hsl(0, 0%, 99%);
+    color:hsl(200, 15%, 8%)
+}
+
+header{
+    width:100%;
+    display:flex;
+    background-color: var(--el-color);
+    padding:15px 55px;
+    justify-content:space-between;
+    box-shadow: 0 4px 10px var(--border-color);
+    position: fixed;
+
+}
+
+.toggle-mode-btn{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    border:none;
+    background:none;
+    cursor:pointer;
+    color: var(--txt-color);
+}
+
+.darkmode-icon{
+    font-size:16px;
+    margin-right:5px;
+}
+
+@media(max-width:648px){
+    header{
+        padding: 15px 15px;
+    }
+}

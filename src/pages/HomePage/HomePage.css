@@ -1,0 +1,146 @@
+.container{
+    font-size:14px;
+}
+
+main{
+    background-color:var(--bg-color);
+    padding:120px 55px;
+    min-height:100vh;
+}
+
+.search-container{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:50px;
+}
+
+.search-field{
+    display:flex;
+    align-items:center;
+    box-shadow: 0 0 10px var(--border-color);
+    background-color:var(--el-color);
+    padding: 0px 25px;
+    width:35%;
+    min-width:300px;
+    gap:15px;
+    font-size:14px;
+    height:50px;
+}
+
+.search-icon{
+    color:var(--input-color);
+    font-size:14px;
+
+}
+.search-field > input{
+    flex:1;
+    border:none;
+    outline: none;
+    background:none;
+    color:var(--input-color);
+    font-size:14px;
+}
+
+.region-drop-down{
+    position:relative;
+}
+
+.region-btn {
+  background-color:var(--el-color);
+  height:50px;
+  border:none;
+  box-shadow: 0 0 10px var(--border-color);
+  width:150px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  color: var(--txt-color);
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.down-icon{
+    color: var(--txt-color);
+    margin-left:25px;
+}
+
+.region-options {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  background-color: var(--el-color);
+  box-shadow: 0 0 10px var(--border-color);
+  color: var(--txt-color);
+  border-radius: 8px;
+  list-style: none;
+  z-index: 1;
+  overflow: hidden;
+  padding: 7px;
+}
+
+
+
+.region-option-btn {
+  width: 100%;
+  padding: 12px 25px;
+  font-family: 'Nunito Sans', sans-serif;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--txt-color);
+  font-size: 14px;
+}
+
+.region-option-btn:hover {
+  background-color: var(--border-color);
+}
+
+.cards-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:55px;
+}
+
+.card{
+    width:250px;
+    box-shadow: 0 0 10px var(--border-color);
+    background-color:var(--el-color);
+    cursor:pointer;
+}
+
+.card img{
+    width:100%;
+    height:150px;
+}
+
+.basic-info{
+    padding:15px 20px 40px;
+}
+
+.basic-info > h3{
+    margin-bottom:15px;
+}
+
+.basic-info > p {
+    margin-bottom:5px;
+}
+
+.basic-info > p > span{
+    font-weight:600;
+}
+
+@media(max-width:648px){
+    .search-container{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .region-btn {
+        height:50px;
+    }
+
+}
