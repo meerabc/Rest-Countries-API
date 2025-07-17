@@ -1,12 +1,25 @@
 import { useState, useRef, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
-const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
+const regions = [
+  { value: "all", label: "All" },
+  { value: "africa", label: "Africa" },
+  { value: "americas", label: "Americas" },
+  { value: "asia", label: "Asia" },
+  { value: "europe", label: "Europe" },
+  { value: "oceania", label: "Oceania" }
+];
 
-export default function RegionDropDown({ onChange }) {
+export default function RegionDropDown({ onChange, value }) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("Filter by Region");
   const dropdownRef = useRef(null);
+
+  // Get display text based on current value
+  const getDisplayText = () => {
+    if (!value || value === "all") return "Filter by Region";
+    const region = regions.find(r => r.value === value);
+    return region ? region.label : "Filter by Region";
+  };
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -19,25 +32,27 @@ export default function RegionDropDown({ onChange }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  function handleSelect(region) {
-    setSelected(region);
+  function handleSelect(regionValue) {
     setOpen(false);
-    // Pass the region name directly to onChange
-    if (onChange) onChange(region);
+    if (onChange) onChange(regionValue);
   }
 
   return (
     <div className="region-drop-down" ref={dropdownRef} >
       <button className="region-btn" onClick={() => setOpen((prev) => !prev)}> 
-          {selected} <FaAngleDown className="down-icon"/>
+          {getDisplayText()} <FaAngleDown className="down-icon"/>
       </button>
 
       {open && (
         <ul className="region-options">
           {regions.map(region => (
-            <li key={region}>
-              <button type="button" className="region-option-btn" onClick={() => handleSelect(region)}>
-                {region}
+            <li key={region.value}>
+              <button 
+                type="button" 
+                className="region-option-btn" 
+                onClick={() => handleSelect(region.value)}
+              >
+                {region.label}
               </button>
             </li>
           ))}

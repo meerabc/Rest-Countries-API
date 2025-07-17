@@ -48,6 +48,7 @@ header{
     justify-content:space-between;
     box-shadow: 0 4px 10px var(--border-color);
     position: fixed;
+    z-index:2;
 
 }
 

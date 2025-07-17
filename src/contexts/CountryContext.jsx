@@ -50,22 +50,43 @@ function countryReducer(state, action){
                 ...state,
                 searchQuery:action.payload
             }
+        case "RESET_FILTERS":
+            return {
+                ...state,
+                currentRegion: "all",
+                searchQuery: "",
+                filteredCountries: state.countries,
+                isFound: state.countries.length > 0
+            }
         case "FILTER_COUNTRIES": {
             let result = [...state.countries]
-            if(state.currentRegion !== "all"){
+            
+            // Filter by region - handle both "all" and "All" cases
+            if(state.currentRegion !== "all" && state.currentRegion.toLowerCase() !== "all"){
                 result = result.filter(country=>
                     country.region.toLowerCase() === state.currentRegion.toLowerCase()
                 )
             }
-            if(state.searchQuery !== ""){
-                result = result.filter(country=>
-                    country.name.common.toLowerCase().includes(state.searchQuery.toLowerCase())
-                )
+            
+            // Filter by search query
+            if (state.searchQuery.trim() !== "") {
+            // Normalize the search query: trim + collapse multiple spaces
+            const normalizedQuery = state.searchQuery
+                .trim()                   // Remove leading/trailing spaces
+                .replace(/\s+/g, ' ')     // Replace multiple spaces with single space
+                .toLowerCase();           // Convert to lowercase for case-insensitive search
+
+            result = result.filter(country => 
+                country.name.common
+                .toLowerCase()          // Normalize country name for comparison
+                .includes(normalizedQuery)
+            );
             }
+            
             return{
                 ...state,
                 filteredCountries : result,
-                isFound : result.length>0
+                isFound : result.length > 0
             }
         }
         default :
@@ -88,8 +109,9 @@ export function CountryProvider({children,initialCountries}){
                 dispatch({type:"FETCH_REQUEST"})
                 try{
                     const response=
-                    await axios.get("https://restcountries.com/v3.1/all?fields=name,flags,capital,population,cca3,borders,currencies,languages,region,tld")
+                    await axios.get("https://restcountries.com/v3.1/all?fields=name,flags,capital,population,cca3,region")
                     dispatch({type:"FETCH_SUCCESS" , payload:response.data})
+                    console.log(response)
                 }
                 catch(error){
                     dispatch({type:"FETCH_FAILURE" , payload:error.message})

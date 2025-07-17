@@ -8,7 +8,7 @@ import RegionDropDown from "./components/RegionDropDown"
 export default function HomePage(){
     
     const {state,dispatch} = useCountryContext()
-    const {filteredCountries,isFound,isLoading,error} = state
+    const {filteredCountries,isFound,isLoading,error,searchQuery,currentRegion} = state
 
     function handleSearch(e) {
         dispatch({type:"SET_SEARCH" , payload:e.target.value})
@@ -32,8 +32,8 @@ export default function HomePage(){
             <Header/>
             <main>
                 <div className="search-container">
-                    <SearchField onChange={handleSearch} />
-                    <RegionDropDown onChange={handleRegionSelect} />
+                    <SearchField value={searchQuery} onChange={handleSearch} />
+                    <RegionDropDown value={currentRegion} onChange={handleRegionSelect} />
                 </div>
                 <div className="cards-container">
                     {isLoading ? (
