@@ -1,58 +1,50 @@
-import './HomePage.css'
-import { useState, useEffect } from 'react';
+import "./HomePage.css"
+import {useCountryContext} from "../../contexts/CountryContext"
 import Header from '../../components/Header'
 import CountryCard from "./components/CountryCard"
 import SearchField from "./components/SearchField"
 import RegionDropDown from "./components/RegionDropDown"
 
-export default function HomePage({countries}){
-
-    const [filteredCountries,setFilteredCountries]= useState(countries);
+export default function HomePage(){
     
+    const {state,dispatch} = useCountryContext()
+    const {filteredCountries,isFound,isLoading,error} = state
 
-    //updates filteredCountries IF the countries prop changes ever in future
+    function handleSearch(e) {
+        dispatch({type:"SET_SEARCH" , payload:e.target.value})
+        dispatch({type:"FILTER_COUNTRIES"})
+    }
 
-    useEffect(()=>{
-         setFilteredCountries(countries)
-    },[countries]
-    )
+    function handleRegionSelect(region) {
+        dispatch({type:"SET_REGION" , payload:region})
+        dispatch({type:"FILTER_COUNTRIES"})
+    }
 
-    const cardElements = filteredCountries.map(country=>
+    const cardElements = filteredCountries.map(country =>
         <CountryCard key={country.cca3} {...country} /> 
     )
-    
-    function filterCountries(e){
-       setFilteredCountries(
-          countries.filter(country=>
-            country.name.common.toLowerCase().includes(e.target.value.toLowerCase())
-          )
-       )
-    }
 
-    function filterByRegion(selectedRegion){
-       // Now we receive the region name directly, not an event object
-       const selected = selectedRegion.toLowerCase();
-       
-       if(selected === "all"){
-        setFilteredCountries(countries)
-       } else{
-        setFilteredCountries(
-            countries.filter(country=>
-                country.region.toLowerCase() === selected
-            ))
-       }     
-    }
+    
+
 
     return(
         <div className='container'>
             <Header/>
             <main>
                 <div className="search-container">
-                    <SearchField onChange={filterCountries} />
-                    <RegionDropDown onChange={filterByRegion} />
+                    <SearchField onChange={handleSearch} />
+                    <RegionDropDown onChange={handleRegionSelect} />
                 </div>
                 <div className="cards-container">
-                    {cardElements}
+                    {isLoading ? (
+                        <div className="loading-div">Loading data ...</div>
+                    ) : error ? (
+                        <div className="error-div">{error}</div>
+                    ) : !isFound ? (
+                        <div className="not-found-div">No Country Found ...</div>
+                    ) : (
+                        cardElements
+                    )}
                 </div>
             </main>
         </div>

@@ -67,8 +67,14 @@ header{
     margin-right:5px;
 }
 
-@media(max-width:648px){
+@media(max-width:600px){
     header{
-        padding: 15px 15px;
+        padding: 25px 15px;
     }
+
+    header> h1 {
+        font-size:20px;
+    }
+
+
 }

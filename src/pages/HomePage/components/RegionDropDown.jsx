@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
-const regions = ["All", "Africa", "America", "Asia", "Europe", "Oceania"];
+const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 export default function RegionDropDown({ onChange }) {
   const [open, setOpen] = useState(false);

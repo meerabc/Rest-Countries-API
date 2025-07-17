@@ -1,7 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import { useCountryContext } from '../../../contexts/CountryContext';
 
-export default function CountryDetail({ country, countries }) {
+export default function CountryDetail({country}) {
+
     const navigate = useNavigate();
+    const {state} = useCountryContext()
+    const {countries} = state
+
+    if(!country) return <div className="no-details-div">Country not found.</div>
 
     const nativeName = country.name?.nativeName ? 
         Object.values(country.name.nativeName)[0]?.official || 'N/A' : 
@@ -13,10 +19,12 @@ export default function CountryDetail({ country, countries }) {
 
     return (
         <div className="country-detail">
-            <img 
-                src={country.flags?.png} 
-                alt={country.flags?.alt || `${country.name?.common} flag`} 
-            />
+            <div className="img-container">
+                <img 
+                    src={country.flags?.png} 
+                    alt={country.flags?.alt || `${country.name?.common} flag`} 
+                />
+            </div>
             <div className="text-content">
                 <h2>{country.name?.common}</h2>
                 <div className="info">

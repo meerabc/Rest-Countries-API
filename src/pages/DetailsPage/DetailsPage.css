@@ -21,11 +21,11 @@ main{
 
 .country-detail{
     display:flex;
-    align-items:center;
 }
 
-.country-detail>img{
+.img-container > img{
     height:250px;
+    width:400px; 
 }
 
 .text-content{
@@ -33,6 +33,7 @@ main{
     flex-direction:column;
     margin-left:100px;
     justify-content:center;
+    max-width:695px;
 }
 
 .text-content>h2{
@@ -41,16 +42,17 @@ main{
 
 .info{
     display:flex;
-    gap:150px;
+    gap:50px;
 }
 
 .info-left,.info-right{
     display:flex;
     flex-direction:column;
+    flex-wrap:wrap;
     gap:5px;
 }
 
-.info-left > p > span, .info-right > p > span{
+.info-left > p > span, .info-right > p > span, .borders-div > span{
     font-weight:600;
 }
 
@@ -74,9 +76,8 @@ main{
     font-size:16px;
 }
 
-@media(max-width:1140px){
+@media(max-width:1000px){
     main{
-        /* padding:0 15px; */
         align-items:center;
     }
 
@@ -94,4 +95,17 @@ main{
         flex-direction:column;
         gap:40px;
     }
+}
+
+@media(max-width:600px){
+
+    main{
+        padding:110px 15px;
+    }
+
+    .img-container > img{      
+        width:100%; 
+    }
+
+
 }

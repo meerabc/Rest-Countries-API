@@ -48,15 +48,15 @@ main{
 
 .region-btn {
   background-color:var(--el-color);
-  height:50px;
   border:none;
   box-shadow: 0 0 10px var(--border-color);
-  width:150px;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   color: var(--txt-color);
   cursor: pointer;
   display:flex;
+  height:50px;
+  width:170px;
   align-items:center;
   justify-content:center;
 }
@@ -68,7 +68,9 @@ main{
 
 .region-options {
   position: absolute;
-  top: 60px;
+  top: 65px;
+  left:0;
+  right:0;
   width: 100%;
   background-color: var(--el-color);
   box-shadow: 0 0 10px var(--border-color);
@@ -79,8 +81,6 @@ main{
   overflow: hidden;
   padding: 7px;
 }
-
-
 
 .region-option-btn {
   width: 100%;
@@ -133,14 +133,27 @@ main{
     font-weight:600;
 }
 
-@media(max-width:648px){
+@media(max-width:650px){
+
     .search-container{
         flex-direction:column;
-        gap:15px;
+        gap:30px;
+        align-items: flex-start;
     }
 
     .region-btn {
         height:50px;
+    }
+
+    .search-field{
+        width:100%;
+    }
+}
+
+@media(max-width:600px){
+
+        main{
+        padding:110px 15px;
     }
 
 }
